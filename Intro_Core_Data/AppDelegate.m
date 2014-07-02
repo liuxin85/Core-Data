@@ -69,7 +69,7 @@
         
             NSError *savingError = nil;
             if ([self.managedObjectContext save:&savingError]) {
-                NSLog(@"Successfully deleted the last person in the array.");
+                NSLog(@"Successfully saved the context.");
             }
         }else{
             NSLog(@"Failed to delete the last person in the array.");
