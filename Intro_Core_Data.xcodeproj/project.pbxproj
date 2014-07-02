@@ -22,6 +22,7 @@
 		4BCDACA4196393CB00A84BE3 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4BCDAC88196393CA00A84BE3 /* CoreData.framework */; };
 		4BCDACAC196393CB00A84BE3 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 4BCDACAA196393CB00A84BE3 /* InfoPlist.strings */; };
 		4BCDACAE196393CB00A84BE3 /* Intro_Core_DataTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCDACAD196393CB00A84BE3 /* Intro_Core_DataTests.m */; };
+		4BCDACB91963978600A84BE3 /* Person.m in Sources */ = {isa = PBXBuildFile; fileRef = 4BCDACB81963978600A84BE3 /* Person.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,8 @@
 		4BCDACA9196393CB00A84BE3 /* Intro_Core_DataTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Intro_Core_DataTests-Info.plist"; sourceTree = "<group>"; };
 		4BCDACAB196393CB00A84BE3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		4BCDACAD196393CB00A84BE3 /* Intro_Core_DataTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Intro_Core_DataTests.m; sourceTree = "<group>"; };
+		4BCDACB71963978600A84BE3 /* Person.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Person.h; sourceTree = "<group>"; };
+		4BCDACB81963978600A84BE3 /* Person.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Person.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -119,6 +122,8 @@
 				4BCDAC94196393CA00A84BE3 /* AppDelegate.m */,
 				4BCDAC99196393CB00A84BE3 /* Images.xcassets */,
 				4BCDAC96196393CB00A84BE3 /* Intro_Core_Data.xcdatamodeld */,
+				4BCDACB71963978600A84BE3 /* Person.h */,
+				4BCDACB81963978600A84BE3 /* Person.m */,
 				4BCDAC8B196393CA00A84BE3 /* Supporting Files */,
 			);
 			path = Intro_Core_Data;
@@ -250,6 +255,7 @@
 			files = (
 				4BCDAC98196393CB00A84BE3 /* Intro_Core_Data.xcdatamodeld in Sources */,
 				4BCDAC95196393CA00A84BE3 /* AppDelegate.m in Sources */,
+				4BCDACB91963978600A84BE3 /* Person.m in Sources */,
 				4BCDAC91196393CA00A84BE3 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

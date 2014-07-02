@@ -7,6 +7,7 @@
 //
 
 #import "AppDelegate.h"
+#import "Person.h"
 
 @implementation AppDelegate
 
@@ -16,6 +17,28 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    Person *newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"Person"
+                                                      inManagedObjectContext:self.managedObjectContext];
+    
+    if (newPerson !=nil) {
+        newPerson.name = @"Selve";
+        newPerson.hair = @"black";
+        newPerson.age = @28;
+        NSError *savingError = nil;
+        if ([self.managedObjectContext save:&savingError]) {
+            NSLog(@"Successfully saved the context.");
+        }else{
+            NSLog(@"Failed to save the context. Error = %@", savingError);
+        }
+        
+    }else{
+        NSLog(@"Failed to create the new person.");
+    }
+    
+    
+    
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
