@@ -15,29 +15,66 @@
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
+
+- (BOOL)createNewPersonWithName: (NSString *)paramName
+                               hair:(NSString *)paramHair
+                                age: (NSUInteger)paramAge
+{
+    BOOL result = NO;
+    if ([paramName length] == 0) {
+        NSLog(@"Name are mandatory.");
+        return NO;
+    }
+    Person *newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"Person"
+                                                      inManagedObjectContext:self.managedObjectContext];
+    if (newPerson == nil) {
+        NSLog(@"Failed to create the new person.");
+        return NO;
+    }
+    newPerson.name = paramName;
+    newPerson.hair = paramHair;
+    newPerson.age = @(paramAge);
+    NSError *savingError = nil;
+    if ([self.managedObjectContext save:&savingError]) {
+        return YES;
+    }else{
+        NSLog(@"Failed to save the new person. Error = %@", savingError);
+    }
+    return result;
+}
+
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
     
-    Person *newPerson = [NSEntityDescription insertNewObjectForEntityForName:@"Person"
-                                                      inManagedObjectContext:self.managedObjectContext];
+    [self createNewPersonWithName:@"Asis"
+                             hair:@"Black"
+                              age:28];
+    [self createNewPersonWithName:@"Bubuli"
+                             hair:@"Yellow"
+                              age:27];
+    // we want to read the contents of the Person entity, create the fetch request first
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]initWithEntityName:@"Person"];
     
-    if (newPerson !=nil) {
-        newPerson.name = @"Selve";
-        newPerson.hair = @"black";
-        newPerson.age = @28;
-        NSError *savingError = nil;
-        if ([self.managedObjectContext save:&savingError]) {
-            NSLog(@"Successfully saved the context.");
-        }else{
-            NSLog(@"Failed to save the context. Error = %@", savingError);
+    NSError *requestError = nil;
+    // execute the fetch request on the context
+    NSArray *persons = [self.managedObjectContext executeFetchRequest: fetchRequest
+                                                                error:&requestError];
+    // Make sure we get the array
+    if ([persons count]>0) {
+        // Go through the persons array one by one
+        NSUInteger counter =1;
+        for (Person *thisPerson in persons) {
+            NSLog(@"Person %lu name = %@", (unsigned long)counter,thisPerson.name);
+            NSLog(@"Person %lu Age = %ld",
+                  (unsigned long)counter,
+                  (unsigned long)[thisPerson.age unsignedIntegerValue]);
+            NSLog(@"Person %lu hair = %@", (unsigned long)counter,thisPerson.hair);
+            counter++;
+            
         }
-        
     }else{
-        NSLog(@"Failed to create the new person.");
+        NSLog(@"Could not find any Person entities in the context.");
     }
-    
-    
-    
     
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
