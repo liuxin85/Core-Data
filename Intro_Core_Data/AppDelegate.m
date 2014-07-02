@@ -62,20 +62,19 @@
     // Make sure we get the array
     if ([persons count]>0) {
         // Go through the persons array one by one
-        NSUInteger counter =1;
-        for (Person *thisPerson in persons) {
-            NSLog(@"Person %lu name = %@", (unsigned long)counter,thisPerson.name);
-            NSLog(@"Person %lu Age = %ld",
-                  (unsigned long)counter,
-                  (unsigned long)[thisPerson.age unsignedIntegerValue]);
-            NSLog(@"Person %lu hair = %@", (unsigned long)counter,thisPerson.hair);
-            counter++;
-            
+        Person *lastPerson = [persons lastObject];
+        [self.managedObjectContext deleteObject: lastPerson];
+        
+        NSError *savingError = nil;
+        if ([self.managedObjectContext save:&savingError]) {
+            NSLog(@"Successfully deleted the last person in the array.");
+        }else{
+            NSLog(@"Failed to delete the last person in the array.");
         }
+        
     }else{
         NSLog(@"Could not find any Person entities in the context.");
     }
-    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
