@@ -64,10 +64,13 @@
         // Go through the persons array one by one
         Person *lastPerson = [persons lastObject];
         [self.managedObjectContext deleteObject: lastPerson];
+        if ([lastPerson isDeleted]) {
+            NSLog(@"Successfully deleted the last person...");
         
-        NSError *savingError = nil;
-        if ([self.managedObjectContext save:&savingError]) {
-            NSLog(@"Successfully deleted the last person in the array.");
+            NSError *savingError = nil;
+            if ([self.managedObjectContext save:&savingError]) {
+                NSLog(@"Successfully deleted the last person in the array.");
+            }
         }else{
             NSLog(@"Failed to delete the last person in the array.");
         }
